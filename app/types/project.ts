@@ -1,4 +1,4 @@
-import {z} from 'zod'
+import { z } from 'zod';
 
 // This is a Zod schema
 // https://zod.dev/
@@ -8,7 +8,7 @@ import {z} from 'zod'
 // Giving you both the flexibility of writing GROQ queries
 // And the safety of Typescript
 // without being limited to the shape of your Sanity Schema
-export const recordZ = z.object({
+export const projectZ = z.object({
   _id: z.string(),
   title: z.string().nullable(),
   slug: z.string().nullable(),
@@ -21,19 +21,19 @@ export const recordZ = z.object({
         _key: z.string(),
         title: z.string().nullable(),
         duration: z.number().nullable(),
-      }),
+      })
     )
     .nullable(),
   // ...being a touch lazy here, these could be more strongly typed
   image: z.any().nullable(),
   content: z.array(z.any()).nullable(),
-})
+});
 
-export type RecordDocument = z.infer<typeof recordZ>
+export type ProjectDocument = z.infer<typeof projectZ>;
 
-export const recordsZ = z.array(recordZ)
+export const projectsZ = z.array(projectZ);
 
-export const recordStubZ = z.object({
+export const projectStubZ = z.object({
   _id: z.string(),
   _type: z.string(),
   title: z.string().nullable(),
@@ -41,8 +41,8 @@ export const recordStubZ = z.object({
   slug: z.string().nullable(),
   artist: z.string().nullable(),
   image: z.any().nullable(),
-})
+});
 
-export const recordStubsZ = z.array(recordStubZ)
+export const projectStubsZ = z.array(projectStubZ);
 
-export type RecordStub = z.infer<typeof recordStubZ>
+export type ProjectStub = z.infer<typeof projectStubZ>;
