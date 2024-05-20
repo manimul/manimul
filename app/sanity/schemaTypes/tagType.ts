@@ -1,9 +1,9 @@
-import {Tags} from 'lucide-react'
-import {defineField, defineType} from 'sanity'
+import { Tags } from 'lucide-react';
+import { defineField, defineType } from 'sanity';
 
-export const genreType = defineType({
-  name: 'genre',
-  title: 'Genre',
+export const tagType = defineType({
+  name: 'tag',
+  title: 'Tag',
   type: 'document',
   icon: Tags,
   fields: [
@@ -19,4 +19,4 @@ export const genreType = defineType({
       },
     }),
   ],
-})
+});

@@ -17,26 +17,21 @@ export const projectType = defineType({
   ],
   groups: [
     {
-      name: 'details',
-      title: 'Details',
-      icon: ThListIcon,
-    },
-    {
-      name: 'editorial',
-      title: 'Editorial',
+      name: 'intro',
+      title: 'Introduction',
       icon: ComposeIcon,
     },
     {
-      name: 'tracks',
-      title: 'Tracks',
-      icon: MenuIcon,
+      name: 'details',
+      title: 'Details',
+      icon: ThListIcon,
     },
   ],
   fields: [
     defineField({
       name: 'title',
       type: 'string',
-      group: 'details',
+      group: 'intro',
     }),
     defineField({
       name: 'slug',
@@ -44,69 +39,94 @@ export const projectType = defineType({
       options: {
         source: 'title',
       },
-      group: 'details',
+      group: 'intro',
     }),
     defineField({
-      name: 'releaseDate',
-      type: 'datetime',
+      name: 'extract',
+      type: 'string',
+      group: 'intro',
     }),
     defineField({
-      name: 'likes',
-      type: 'number',
-      readOnly: true,
-      fieldset: 'rating',
-    }),
-    defineField({
-      name: 'dislikes',
-      type: 'number',
-      readOnly: true,
-      fieldset: 'rating',
-    }),
-    defineField({
-      name: 'artist',
-      type: 'reference',
-      to: [{ type: 'artist' }],
-      group: 'details',
-    }),
-    defineField({
-      name: 'genres',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'genre' } }],
-      group: 'details',
-    }),
-    defineField({
-      name: 'content',
-      type: 'array',
-      of: [
-        defineArrayMember({ type: 'block' }),
-        defineArrayMember({ type: 'image', icon: ImageIcon }),
-      ],
-      group: 'editorial',
+      name: 'link',
+      type: 'string',
+      group: 'intro',
     }),
     defineField({
       name: 'image',
       type: 'image',
       options: { hotspot: true },
-      group: 'editorial',
+      group: 'intro',
       fields: [defineField({ name: 'alt', type: 'string' })],
     }),
+
     defineField({
-      name: 'tracks',
+      name: 'client',
+      type: 'string',
+      group: 'details',
+    }),
+    defineField({
+      name: 'role',
+      type: 'string',
+      group: 'details',
+    }),
+
+    //genres => tech
+    defineField({
+      name: 'tag',
       type: 'array',
-      of: [{ type: 'track' }],
-      group: 'tracks',
+      of: [{ type: 'reference', to: { type: 'tag' } }],
+      group: 'details',
+    }),
+
+    //content => details
+    defineField({
+      name: 'details',
+      type: 'array',
+      of: [
+        defineArrayMember({ type: 'block' }),
+        defineArrayMember({ type: 'image', icon: ImageIcon }),
+      ],
+      group: 'details',
+    }),
+
+    defineField({
+      name: 'startDate',
+      type: 'datetime',
+      group: 'details',
+    }),
+
+    defineField({
+      name: 'endDate',
+      type: 'datetime',
+      group: 'details',
+    }),
+
+    defineField({
+      name: 'images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: 'alt', type: 'string' }),
+            defineField({ name: 'caption', type: 'string' }),
+          ],
+        },
+      ],
+      group: 'details',
     }),
   ],
   preview: {
     select: {
       title: 'title',
-      artist: 'artist.name',
+      client: 'client',
       media: 'image',
     },
-    prepare({ title, artist, media }) {
+    prepare({ title, client, media }) {
       return {
         title,
-        subtitle: artist,
+        subtitle: client,
         media,
       };
     },

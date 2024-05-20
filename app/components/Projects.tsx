@@ -52,13 +52,7 @@ export function Projects(props: ProjectProps) {
                 <ProjectCover image={project.image} />
               )}
             </div>
-            <div className='flex flex-col -mt-6'>
-              {project?.artist ? (
-                <span className='bg-black font-bold leading-none tracking-tighter text-white dark:bg-white dark:text-black'>
-                  {project.artist}
-                </span>
-              ) : null}
-            </div>
+            <div className='flex flex-col -mt-6'></div>
           </li>
         ))}
       </ul>

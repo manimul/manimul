@@ -9,7 +9,6 @@ import schema from '~/sanity/schemaTypes';
 
 const client = getCliClient();
 const PROJECT_COUNT = 6;
-const ARTIST_COUNT = 20;
 
 const defaultSchema = Schema.compile({ types: schema });
 const blockContentSchema = defaultSchema
@@ -94,7 +93,7 @@ async function createData() {
       _id: faker.string.uuid(),
       title,
       slug: { current: faker.helpers.slugify(title).toLowerCase() },
-      releaseDate: faker.date.past(),
+      startDate: faker.date.past(),
       likes: Math.floor(Math.random() * 100),
       dislikes: Math.floor(Math.random() * 100),
       content: createFakeBlockContent(),

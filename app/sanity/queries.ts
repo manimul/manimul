@@ -6,33 +6,38 @@ export const PROJECTS_QUERY = groq`*[_type == "project"][0...12]|order(title asc
     _id,
     _type,
     title,
-    releaseDate,
+    startDate,
     "slug": slug.current,
-    "artist": artist->name,
+    client,
+    
     image
-  } | order(releaseDate desc)`;
+  } `;
 
 export const PROJECT_QUERY = groq`*[_type == "project" && slug.current == $slug][0]{
   ...,
   _id,
   title,
-  releaseDate,
+ extract,
+  link,
+  image,
   // GROQ can re-shape data in the request!
   "slug": slug.current,
-  "artist": artist->name,
+  
   // coalesce() returns the first value that is not null
   // so we can ensure we have at least a zero
-  "likes": coalesce(likes, 0),
-  "dislikes": coalesce(dislikes, 0),
+
   // for simplicity in this demo these are typed as "any"
   // we can make them type-safe with a little more work
   // https://www.simeongriggs.dev/type-safe-groq-queries-for-sanity-data-with-zod
-  image,
   content,
-  // this is how we extract values from arrays
-  tracks[]{
+  client,
+  role,
+  details,
+  startDate,
+  endDate,
+  tags[]->{
     _key,
     title,
-    duration
-  }
+    slug
+  },
 }`;

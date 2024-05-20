@@ -22,9 +22,8 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
       // Document lists
       S.documentTypeListItem('project').title('Projects').icon(Disc),
-      S.documentTypeListItem('artist').title('Artists').icon(Users),
       S.divider(),
-      S.documentTypeListItem('genre').title('Genres').icon(Tags),
+      S.documentTypeListItem('tag').title('Tags').icon(Tags),
     ]);
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (
