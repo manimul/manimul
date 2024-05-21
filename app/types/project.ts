@@ -13,8 +13,25 @@ export const projectZ = z.object({
   _id: z.string(),
   title: z.string().nullable(),
   slug: z.string().nullable(),
+  extract: z.string().nullable(),
+  link: z.string().nullable(),
+  client: z.string().nullable(),
+  role: z.string().nullable(),
+  startDate: z.string().nullable(),
+  endDate: z.string().nullable(),
   image: z.any().nullable(),
-  content: z.array(z.any()).nullable(),
+  //tag: z.array(z.any()).nullable(),
+  tags: z
+    .array(
+      z.object({
+        title: z.any().nullable(),
+        slug: z.any().nullable(),
+        _key: z.string().nullable(),
+      })
+    )
+    .nullable(),
+  images: z.array(z.any()).nullable(),
+  details: z.array(z.any()).nullable(),
 });
 
 export type ProjectDocument = z.infer<typeof projectZ>;

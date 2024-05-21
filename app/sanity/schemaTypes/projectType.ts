@@ -7,14 +7,6 @@ export const projectType = defineType({
   title: 'Project',
   type: 'document',
   icon: Disc,
-  fieldsets: [
-    {
-      name: 'rating',
-      title: 'Rating',
-      description: 'These fields are written to from the Remix front end',
-      options: { columns: 2 },
-    },
-  ],
   groups: [
     {
       name: 'intro',
@@ -72,7 +64,7 @@ export const projectType = defineType({
 
     //genres => tech
     defineField({
-      name: 'tag',
+      name: 'tags',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'tag' } }],
       group: 'details',

@@ -35,9 +35,10 @@ export const PROJECT_QUERY = groq`*[_type == "project" && slug.current == $slug]
   details,
   startDate,
   endDate,
-  tags[]->{
+  "tags": tags[]{
     _key,
-    title,
-    slug
+    "title": @->title,
+    "slug": @->slug.current
   },
+  images,
 }`;
