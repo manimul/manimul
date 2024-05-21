@@ -19,6 +19,14 @@ export const structure: StructureResolver = (S) =>
         .schemaType('home')
         .title('Home')
         .child(S.editor().id('home').schemaType('home').documentId('home')),
+      S.listItem()
+        .icon(Users)
+        .id('profile')
+        .schemaType('profile')
+        .title('Profile')
+        .child(
+          S.editor().id('profile').schemaType('profile').documentId('profile')
+        ),
       S.divider(),
       // Document lists
       S.documentTypeListItem('project').title('Projects').icon(Disc),
