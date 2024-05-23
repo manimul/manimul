@@ -7,9 +7,12 @@ import { Projects } from '~/components/Projects';
 import type { loader as layoutLoader } from '~/routes/_website';
 import { loadQuery } from '~/sanity/loader.server';
 import { loadQueryOptions } from '~/sanity/loadQueryOptions.server';
-import { HOME_QUERY, PROJECTS_QUERY } from '~/sanity/queries';
+import { HOME_QUERY, PROJECTS_QUERY, PROFILE_QUERY } from '~/sanity/queries';
 import type { ProjectStub } from '~/types/project';
+import type { ProfileDocument } from '~/types/profile';
+import { profileZ } from '~/types/profile';
 import { projectStubsZ } from '~/types/project';
+import { Profile } from '~/components/Profile';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -30,6 +33,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { options } = await loadQueryOptions(request.headers);
   const projectsQuery = PROJECTS_QUERY;
   const homeQuery = HOME_QUERY;
+  const profileQuery = PROFILE_QUERY;
   const queryParams = {};
   const initial = await loadQuery<ProjectStub[]>(
     projectsQuery,
@@ -44,15 +48,27 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     throw new Response('Not found', { status: 404 });
   }
 
+  const profile = await loadQuery<ProfileDocument>(
+    profileQuery,
+    queryParams,
+    options
+  ).then((res) => ({
+    ...res,
+    data: res.data ? profileZ.parse(res.data) : null,
+  }));
+
   return json({
     initial,
+    profile,
+    profileQuery,
     projectsQuery,
     params: queryParams,
   });
 };
 
 export default function Index() {
-  const { initial, projectsQuery, params } = useLoaderData<typeof loader>();
+  const { initial, profile, profileQuery, projectsQuery, params } =
+    useLoaderData<typeof loader>();
   const { data, loading, encodeDataAttribute } = useQuery<typeof initial.data>(
     projectsQuery,
     params,
@@ -63,9 +79,23 @@ export default function Index() {
     }
   );
 
+  const { data: profileData } = useQuery<typeof profile.data>(
+    profileQuery,
+    params,
+    {
+      // There's a TS issue with how initial comes over the wire
+      // @ts-expect-error
+      initial: profile,
+    }
+  );
+
   if (loading && !data) {
     return <Loading />;
   } else if (!data || !initial.data) {
+    return <div>Not found</div>;
+  }
+
+  if (!profileData || !profile.data) {
     return <div>Not found</div>;
   }
 
@@ -73,6 +103,10 @@ export default function Index() {
     <>
       <Projects
         projects={data || initial.data}
+        encodeDataAttribute={encodeDataAttribute}
+      />
+      <Profile
+        profile={profileData}
         encodeDataAttribute={encodeDataAttribute}
       />
     </>

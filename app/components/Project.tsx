@@ -32,27 +32,28 @@ export function Project({ data, encodeDataAttribute }: ProjectProps) {
   } = data;
 
   return (
-    <article className='flex flex-col items-start gap-4 lg:flex-row lg:gap-12'>
+    <article className='flex flex-col items-start gap-4 lg:flex-row lg:gap-12 my-8'>
       <div className='flex flex-shrink-0 flex-col gap-4 lg:gap-6 w-full '>
-        <header className='flex flex-row justify-between items-end'>
-          <Title>{title}</Title>
-          <div className='w-1/3 -mb-12 z-10 -mr-12 bg-[#FFFAF2] p-6 rounded-lg'>
-            {' '}
-            {extract && <p>{extract}</p>}
-            {link && (
-              <a
-                href={link}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-blue-500 underline'
-              >
-                {link}
-              </a>
-            )}
-          </div>
+        <header className='flex flex-col gap-4 lg:gap-6   text-center md:text-left lg:flex-row lg:justify-between items-center lg:items-end'>
+          <Title>{title}</Title>{' '}
+          {extract && (
+            <div className=' lg:w-1/3 -mb-12 z-10 lg:-mr-32 bg-[#FFFAF2] p-6 rounded-lg'>
+              <p>{extract}</p>{' '}
+              {link && (
+                <a
+                  href={link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-blue-500 underline'
+                >
+                  {link}
+                </a>
+              )}
+            </div>
+          )}
         </header>
         <img
-          className=' h-auto w-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out'
+          className=' h-auto max-w-none object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out -ml-32 -mr-32  '
           src={urlBuilder({ projectId, dataset })
             .image(image)
             .height(700)
@@ -63,7 +64,7 @@ export function Project({ data, encodeDataAttribute }: ProjectProps) {
           alt={image?.alt ?? ``}
           loading='lazy'
         />
-        <table className='table-auto mx-auto w-3/4  bg-[#FFFAF2] rounded-xl '>
+        <table className='table-auto mx-auto lg:w-3/4  bg-[#FFFAF2] rounded-xl '>
           <tbody className='p-6'>
             {client && (
               <tr className=' border-b border-[#F7DFB9] border-dashed'>
@@ -131,18 +132,23 @@ export function Project({ data, encodeDataAttribute }: ProjectProps) {
         {images && images?.length > 0 ? (
           <div>
             {images.map((image) => (
-              <img
-                className=' h-auto w-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out'
-                src={urlBuilder({ projectId, dataset })
-                  .image(image)
-                  .height(1000)
-                  .width(800)
-                  .fit('max')
-                  .auto('format')
-                  .url()}
-                alt={image?.alt ?? ``}
-                loading='lazy'
-              />
+              <figure className='my-12'>
+                <img
+                  className=' h-auto w-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out'
+                  src={urlBuilder({ projectId, dataset })
+                    .image(image)
+                    .height(600)
+                    .width(1200)
+                    .fit('max')
+                    .auto('format')
+                    .url()}
+                  alt={image?.alt ?? ``}
+                  loading='lazy'
+                />
+                <figcaption className=' text-left text-base text-neutral-600  bg-[#FFFAF2] p-4 rounded-b-xl'>
+                  {image?.caption ?? ''}
+                </figcaption>
+              </figure>
             ))}
           </div>
         ) : null}

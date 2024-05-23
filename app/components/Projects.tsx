@@ -60,20 +60,6 @@ export function Projects(props: ProjectProps) {
   ) : (
     <div className='prose prose-xl mx-auto bg-green-50 p-4'>
       <p>No projects found, yet!</p>
-      <p>
-        <a href='/studio'>Log in to your Sanity Studio</a> and start creating
-        content!
-      </p>
-      <p>Or, run </p>
-      <pre>
-        <code>
-          npx sanity@latest exec ./scripts/createData.ts --with-user-token
-        </code>
-      </pre>
-      <p>
-        from the command line to delete existing documents populate the site
-        with content.{' '}
-      </p>
     </div>
   );
 }

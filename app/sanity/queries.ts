@@ -42,3 +42,14 @@ export const PROJECT_QUERY = groq`*[_type == "project" && slug.current == $slug]
   },
   images,
 }`;
+
+export const PROFILE_QUERY = groq`*[_type == "profile"][0]{
+  title,
+  image,
+  content,
+  email,
+  phone,
+  linkedin,
+  github,
+  experience,
+}`;
