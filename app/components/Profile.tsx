@@ -23,8 +23,8 @@ export function Profile(props: ProfileProps) {
       : 'Present';
   };
   return (
-    <section className='p-12 border-2 border-dashed bg-[#FFFAF2] border-[#F7DFB9] rounded-3xl  '>
-      <div className='flex flex-row gap-12'>
+    <section className=' p-4 md:p-12 border-2 border-dashed bg-[#FFFAF2] border-[#F7DFB9] rounded-3xl  '>
+      <div className='flex flex-col md:flex-row md:gap-12'>
         {image && (
           <img
             className='   '
@@ -59,17 +59,19 @@ export function Profile(props: ProfileProps) {
           )}
         </div>
       </div>
-      <h2 className='text-2xl'>Experience</h2>
+      <h2 className='mt-8 text-2xl md:text-4xl'>Experience</h2>
       <div className='w-full'>
         {experience && experience?.length > 0 ? (
           <ul>
             {experience.map((exp, expI) => (
               <li
-                className='grid grid-flow-row grid-cols-3  w-full gap-2 my-8'
+                className='grid grid-flow-row grid-cols-3  w-full gap-2 my-4 md:my-8'
                 key={expI}
               >
-                <h2 className='text-2xl col-span-2'>{exp.title}</h2>
-                <p className='col-span-1 text-right'>
+                <h2 className='text-lg font-bold md:text-2xl col-span-2'>
+                  {exp.title}
+                </h2>
+                <p className='col-span-1 text-right text-sm'>
                   {formatYear(exp.startDate)} - {formatYear(exp.endDate)}
                 </p>
                 <p className='col-span-3'>
@@ -79,6 +81,7 @@ export function Profile(props: ProfileProps) {
                       href={exp.link}
                       target='_blank'
                       rel='noopener noreferrer'
+                      className='font-medium text-sm md:text-base'
                     >
                       {exp.employer}
                     </a>

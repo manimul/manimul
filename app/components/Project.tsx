@@ -37,7 +37,7 @@ export function Project({ data, encodeDataAttribute }: ProjectProps) {
         <header className='flex flex-col gap-4 lg:gap-6   text-center md:text-left lg:flex-row lg:justify-between items-center lg:items-end'>
           <Title>{title}</Title>{' '}
           {extract && (
-            <div className=' lg:w-1/3 -mb-12 z-10 lg:-mr-32 bg-[#FFFAF2] p-6 rounded-lg'>
+            <div className=' lg:w-1/3 md:-mb-12 z-10 lg:-mr-32 bg-[#FFFAF2] p-6 rounded-lg'>
               <p>{extract}</p>{' '}
               {link && (
                 <a
@@ -53,10 +53,10 @@ export function Project({ data, encodeDataAttribute }: ProjectProps) {
           )}
         </header>
         <img
-          className=' h-auto max-w-none object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out -ml-32 -mr-32  '
+          className=' h-auto  max-w-none object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out -ml-4 -mr-4 md:-ml-32 md:-mr-32  '
           src={urlBuilder({ projectId, dataset })
             .image(image)
-            .height(700)
+            .height(1200)
             .width(2000)
             .fit('max')
             .auto('format')

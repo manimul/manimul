@@ -66,10 +66,10 @@ export default function Website(props: ProjectCoverProps) {
       <Header home={home} theme={theme} />
       <div className='container mx-auto p-4 lg:p-12 grid grid-cols-1 gap-4 border-2 border-dashed border-[#F7DFB9] -mt-4 z-0 lg:gap-12 rounded-3xl '>
         {home?.title && home?.heroImage && pathname === '/' ? (
-          <section className='py-12 px-12   flex  '>
+          <section className='py-12 px-4 md:px-12   flex  '>
             <div className='space-y-8'>
               <Title>{home?.title}</Title>
-              <div className='lowercase font-semibold flex text-2xl space-x-8   '>
+              <div className='lowercase font-semibold flex md:text-2xl space-x-8   '>
                 <Link to='#' className='flex align-middle items-center     '>
                   <span className='inline-flex w-6 h-6 rounded-xl bg-[#F0531C] mr-2'></span>
                   <span className=' relative after:bg-[#F0531C] after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer '>
@@ -84,7 +84,7 @@ export default function Website(props: ProjectCoverProps) {
                 </Link>
               </div>
             </div>
-            <div className='-mr-48 -mt-32'>
+            <div className='-mr-48 -mt-32 hidden md:block'>
               <img
                 className='h-auto w-full object-cover '
                 src={urlBuilder({ projectId, dataset })

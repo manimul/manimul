@@ -7,34 +7,48 @@ import {
   ArrowUpRight,
   ArrowUpRightSquare,
 } from 'lucide-react';
+import { number } from 'zod';
 
 import { ProjectCover } from '~/components/ProjectCover';
 import type { ProjectStub } from '~/types/project';
 
 type ProjectProps = {
   projects: ProjectStub[];
+  numberOfProjects?: number;
   encodeDataAttribute?: EncodeDataAttributeCallback;
 };
 
 export function Projects(props: ProjectProps) {
-  const { projects = [], encodeDataAttribute } = props;
+  const { projects = [], encodeDataAttribute, numberOfProjects } = props;
+  const displayedProjects = numberOfProjects
+    ? projects.slice(0, numberOfProjects)
+    : projects;
 
   return projects.length > 0 ? (
-    <section className='p-12 border-2 border-dashed border-[#F7DFB9] rounded-3xl '>
+    <section className='p-2 md:p-12 border-2 border-dashed border-[#F7DFB9] rounded-3xl '>
       <div className='flex justify-between'>
-        <h1 className='font-semibold px-4 -mt-20 bg-[#F9EDDA]  mb-12 text-6xl'>
-          Projects
-        </h1>
-        <Link
-          to='/'
-          className='lowercase font-semibold px-4 -mt-16 bg-[#F9EDDA]  mb-12 text-xl flex group'
-        >
-          see all{' '}
-          <ArrowUpRight className='group-hover:rotate-45 transition-transform duration-300 ease-in-out' />
-        </Link>
+        {numberOfProjects ? (
+          <>
+            {' '}
+            <h1 className='font-semibold md:px-4 -mt-6 md:-mt-20 bg-[#F9EDDA]  md:mb-12 text-2xl md:text-6xl'>
+              Recent Projects
+            </h1>
+            <Link
+              to='/'
+              className='lowercase font-semibold px-4 -mt-6 md:-mt-16 bg-[#F9EDDA] mb-6  md:mb-12 text-xl flex group'
+            >
+              see all{' '}
+              <ArrowUpRight className='group-hover:rotate-45 transition-transform duration-300 ease-in-out' />
+            </Link>
+          </>
+        ) : (
+          <h1 className='font-semibold md:px-4 -mt-6 md:-mt-20 bg-[#F9EDDA]  md:mb-12 text-2xl md:text-6xl'>
+            Projects
+          </h1>
+        )}
       </div>
-      <ul className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-4 lg:grid-cols-3'>
-        {projects.map((project, projectI) => (
+      <ul className='grid sm:grid-cols-2 gap-2 md:grid-cols-3 lg:gap-4 lg:grid-cols-3'>
+        {displayedProjects.map((project, projectI) => (
           <li
             key={project._id}
             className=' relative h-auto  group overflow-hidden rounded-2xl'

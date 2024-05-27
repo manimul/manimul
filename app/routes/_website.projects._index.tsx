@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Link, useLoaderData } from '@remix-run/react';
+import { Link, Outlet, useLoaderData } from '@remix-run/react';
 import { useQuery } from '@sanity/react-loader';
 import { Loading } from '~/components/Loading';
 import { Projects } from '~/components/Projects';
@@ -103,13 +103,9 @@ export default function Index() {
     <>
       <Projects
         projects={data || initial.data}
-        numberOfProjects={3}
         encodeDataAttribute={encodeDataAttribute}
       />
-      <Profile
-        profile={profileData}
-        encodeDataAttribute={encodeDataAttribute}
-      />
+      <Outlet />
     </>
   );
 }
