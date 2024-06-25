@@ -31,20 +31,28 @@ export function Project({ data, encodeDataAttribute }: ProjectProps) {
     images,
   } = data;
 
+  function newDate(date: any) {
+    const dateFormated = new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+    });
+    return dateFormated;
+  }
+
   return (
     <article className='flex flex-col items-start gap-4 lg:flex-row lg:gap-12 my-8'>
       <div className='flex flex-shrink-0 flex-col gap-4 lg:gap-6 w-full '>
         <header className='flex flex-col gap-4 lg:gap-6   text-center md:text-left lg:flex-row lg:justify-between items-center lg:items-end'>
           <Title>{title}</Title>{' '}
           {extract && (
-            <div className=' lg:w-1/3 md:-mb-12 z-10 lg:-mr-32 bg-[#FFFAF2] p-6 rounded-lg'>
-              <p>{extract}</p>{' '}
+            <div className=' lg:w-1/3  md:-mb-12 z-10 lg:-mr-32 bg-[#FFFAF2] p-6 rounded-lg'>
+              <p className='my-2'>{extract}</p>{' '}
               {link && (
                 <a
                   href={link}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-blue-500 underline'
+                  className=' font-bold underline'
                 >
                   {link}
                 </a>
@@ -88,7 +96,8 @@ export function Project({ data, encodeDataAttribute }: ProjectProps) {
                   Date
                 </td>
                 <td>
-                  {startDate} - {endDate ? endDate : 'present'}
+                  {newDate(startDate)} -{' '}
+                  {endDate ? newDate(endDate) : 'present'}
                 </td>
               </tr>
             )}

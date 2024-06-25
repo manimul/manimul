@@ -1,11 +1,9 @@
 import { NavLink } from '@remix-run/react';
-import type { LayoutProps } from '~/components/Layout';
 import { Logo } from '~/components/Logo';
-import { ThemeToggle } from '~/components/ThemeToggle';
 
-export function Header(props: LayoutProps) {
+export function Header(home: any) {
   return (
-    <header className=' transition-colors duration-1000 ease-in-out dark:border-gray-900 z-10 bg-[#F9EDDA] '>
+    <header className=' transition-colors duration-1000 ease-in-out z-10 '>
       <div className='container mx-auto flex items-center justify-between pt-9  lg:px-12 '>
         <nav className='flex gap-4 bg-[#F9EDDA] px-4 mx-auto lowercase text-xl font-semibold'>
           <NavLink to='/'>Home</NavLink>

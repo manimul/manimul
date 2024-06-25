@@ -59,14 +59,13 @@ export default function Website(props: ProjectCoverProps) {
     initial,
   });
   const { pathname } = useLocation();
-  const { theme } = useOutletContext<{ theme: ThemePreference }>();
 
   return (
     <>
-      <Header home={home} theme={theme} />
+      <Header home={home} />
       <div className='container mx-auto p-4 lg:p-12 grid grid-cols-1 gap-4 border-2 border-dashed border-[#F7DFB9] -mt-4 z-0 lg:gap-12 rounded-3xl '>
         {home?.title && home?.heroImage && pathname === '/' ? (
-          <section className='py-12 px-4 md:px-12   flex  '>
+          <section className='py-12 px-4 md:px-12   flex  items-center '>
             <div className='space-y-8'>
               <Title>{home?.title}</Title>
               <div className='lowercase font-semibold flex md:text-2xl space-x-8   '>
@@ -84,9 +83,9 @@ export default function Website(props: ProjectCoverProps) {
                 </Link>
               </div>
             </div>
-            <div className='-mr-48 -mt-32 hidden md:block'>
+            <div className='-mr-48 -mt-24 hidden md:block'>
               <img
-                className='h-auto w-full object-cover '
+                className='h-auto w-full object-cover  '
                 src={urlBuilder({ projectId, dataset })
                   .image(home?.heroImage)
                   .height(800)

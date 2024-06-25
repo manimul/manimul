@@ -6,6 +6,7 @@ import type { ProfileDocument } from '~/types/profile';
 import { dataset, projectId } from '~/sanity/projectDetails';
 import urlBuilder from '@sanity/image-url';
 import { SanityContent } from './SanityContent';
+import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
 
 type ProfileProps = {
   profile: ProfileDocument;
@@ -41,20 +42,46 @@ export function Profile(props: ProfileProps) {
         )}
 
         <div className='max-w-2xl flex flex-col gap-4'>
-          {title && <h1 className=' text-4xl'>{title}</h1>}
+          {title && <h1 className=' text-6xl font-semibold'>{title}</h1>}
           {content && content?.length > 0 ? (
             <SanityContent value={content} />
           ) : null}
-          {email && <p>Email: {email}</p>}
+          {email && (
+            <a
+              href={`mailto:${email}`}
+              className='inline-flex font-bold gap-1 lowercase items-center '
+            >
+              <MailIcon size={18} />
+              <span className=' relative after:bg-[#0A332D] after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer '>
+                Email
+              </span>
+            </a>
+          )}
           {linkedin && (
-            <a href={linkedin} target='_blank' rel='noopener noreferrer'>
-              LinkedIn
+            <a
+              className='inline-flex gap-1 font-bold lowercase items-center'
+              href={linkedin}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <LinkedinIcon size={18} />
+              <span className=' relative after:bg-[#0A332D] after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer '>
+                LinkedIn
+              </span>
             </a>
           )}
 
           {github && (
-            <a href={github} target='_blank' rel='noopener noreferrer'>
-              GitHub
+            <a
+              className='inline-flex gap-1 font-bold lowercase items-center'
+              href={github}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <GithubIcon size={18} />
+              <span className=' relative after:bg-[#0A332D] after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer '>
+                Github
+              </span>
             </a>
           )}
         </div>
